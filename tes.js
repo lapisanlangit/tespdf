@@ -20,6 +20,7 @@ let judulKolom = [{ text: 'NIP',style: 'judulKolom' }, { text: 'Nama', style: 'j
 //SUSUN 
 let daftar = susunListTabel(listData, kolom, styles, judulKolom);
 
+console.log(daftar)
 
 var dd = {
     content: [
