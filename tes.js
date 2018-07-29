@@ -67,6 +67,20 @@ daftar =
 //  console.log(daftar[1].length)
 //  var ganti=daftar[1][1].style='IsiDataTebal';
 
+//contoh penggunaan
+
+hasilFormat=formatRow(daftar,"isiDataTebal",1,"")
+console.log(hasilFormat)
+hasilnya :
+[ [ { text: 'INDUK', style: 'judulKolom' },{ text: 'ANAK', style: 'judulKolom' },{ text: 'JUMLAH', style: 'judulKolom' } ],
+  [ { text: '1', style: 'isiDataTebal' },{ text: '', style: 'isiDataTebal' },{ text: '1000', style: 'isiDataTebal' } ],
+  [ { text: '1', style: 'isiData' }, { text: '01', style: 'isiData' },{ text: '500', style: 'number' } ],
+  [ { text: '1', style: 'isiData' }, { text: '02', style: 'isiData' },{ text: '500', style: 'number' } ],
+  [ { text: '2', style: 'isiDataTebal' },{ text: '', style: 'isiDataTebal' }, { text: '2000', style: 'isiDataTebal' } ],
+  [ { text: '2', style: 'isiData' },{ text: '01', style: 'isiData' },{ text: '1000', style: 'number' } ],
+  [ { text: '2', style: 'isiData' }, { text: '02', style: 'isiData' },{ text: '1000', style: 'number' } ] ]
+
+
 function formatRow(daftar,nmstyle,indeksKondisi,kondisi){
   for (let index = 1; index < daftar.length; index++) {
     const element = daftar[index][indeksKondisi].text;
@@ -84,6 +98,34 @@ function formatRow(daftar,nmstyle,indeksKondisi,kondisi){
   return daftar
 }
 
+
+hasilFormat=formatKolomKhusus(daftar,"uangtebal",1,"",2)
+ console.log(hasilFormat)
+//  hasilnya : uangtebal akan terisi pada kolom tertentu
+
+ [ [ { text: 'INDUK', style: 'judulKolom' },
+ { text: 'ANAK', style: 'judulKolom' },
+ { text: 'JUMLAH', style: 'judulKolom' } ],
+[ { text: '1', style: 'isiData' },
+ { text: '', style: 'isiData' },
+ { text: '1000', style: 'uangtebal' } ],
+[ { text: '1', style: 'isiData' },
+ { text: '01', style: 'isiData' },
+ { text: '500', style: 'number' } ],
+[ { text: '1', style: 'isiData' },
+ { text: '02', style: 'isiData' },
+ { text: '500', style: 'number' } ],
+[ { text: '2', style: 'isiData' },
+ { text: '', style: 'isiData' },
+ { text: '2000', style: 'uangtebal' } ],
+[ { text: '2', style: 'isiData' },
+ { text: '01', style: 'isiData' },
+ { text: '1000', style: 'number' } ],
+[ { text: '2', style: 'isiData' },
+ { text: '02', style: 'isiData' },
+ { text: '1000', style: 'number' } ] ]
+
+
 function formatKolomKhusus(daftar,nmstyle,indeksKondisi,kondisi,kolomKe){
   for (let index = 1; index < daftar.length; index++) {
     const element = daftar[index][indeksKondisi].text;
@@ -98,9 +140,6 @@ function formatKolomKhusus(daftar,nmstyle,indeksKondisi,kondisi,kolomKe){
   }
   return daftar
 }
-
-hasilFormat=formatKolomKhusus(daftar,"uangtebal",1,"",2)
- console.log(hasilFormat)
 
 
  // objKolom1['text'] = daftar[index][0].text;
