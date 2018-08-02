@@ -46,24 +46,35 @@ for (let index = 0; index < listTabel.length; index++) {
 }
 
 let listData = listTabel;
-let kolom = ['kode', 'nmket', 'jumlahribuan', 'realisasiribuan', 'sisaribuan', 'persen'];
-let styles = ['isiKode', 'isiData', 'uang', 'uang', 'uang', 'uang']
-let judulKolom = [{ text: 'KODE', style: 'judulKolom' }, { text: 'URAIAN', style: 'judulKolom' }, { text: 'PAGU', style: 'judulKolom' }, { text: 'REALISASI', style: 'judulKolom' }, { text: 'SISA PAGU', style: 'judulKolom' }, { text: '(%)', style: 'judulKolom' }];
+let kolom = ['kode','urutan','nmket', 'jumlahribuan', 'realisasiribuan', 'sisaribuan', 'persen'];
+let styles = ['isiKode','isiDataKosong', 'isiData', 'uang', 'uang', 'uang', 'uang']
+let styles1 = ['isiKodeTebalBiru','isiDataKosongTebal', 'isiDataTebalBiru', 'uangTebalBiru', 'uangTebalBiru', 'uangTebalBiru', 'uangTebalBiru']
+let styles2 = ['isiKodeTebal','isiDataKosongTebal', 'isiDataTebal', 'uangTebal', 'uangTebal', 'uangTebal', 'uangTebal']
+let styles3 = ['isiKodeTebalMiring','isiDataKosongTebal', 'isiDataTebalMiring', 'uangTebalMiring', 'uangTebalMiring', 'uangTebalMiring', 'uangTebalMiring']
+
+
+
+let judulKolom = [{ text: 'KODE', style: 'judulKolom' }, {},{ text: 'URAIAN', style: 'judulKolom' }, { text: 'PAGU', style: 'judulKolom' }, { text: 'REALISASI', style: 'judulKolom' }, { text: 'SISA PAGU', style: 'judulKolom' }, { text: '(%)', style: 'judulKolom' }];
 
 //SUSUN 
 let daftar = susunListTabel(listData, kolom, styles, judulKolom);
+daftar=formatRow(daftar,"isiDataTebal",2,"1")
+// console.log(daftar)
 
-//   console.log(daftar);
-
-
-
-//   var kdBank="002"
-//   var nmBank="BANK TABUNGAN NEGARA"
-//   var periode="JULI 2018"
-
+daftar=formatRow(daftar,styles1,1,"1")
+daftar=formatRow(daftar,styles2,1,"2")
+daftar=formatRow(daftar,styles3,1,"3")
+daftar=formatRow(daftar,styles3,1,"4")
+daftar=formatRow(daftar,styles3,1,"5")
+daftar=formatRow(daftar,styles3,1,"6")
+// console.log(daftar)
 
 
 var dd = {
+    footer: function(currentPage, pageCount) { 
+        return {text :'Halaman '+ currentPage.toString(),fontSize:8, alignment:'right',italics:true, margin: [ 1, 3, 25, 1 ] }
+    },
+    pageOrientation: 'landscape',
     content: [
         {
             text: 'LAPORAN REALISASI ANGGARAN', style: 'judulUtama'
@@ -73,16 +84,11 @@ var dd = {
         },
         {
             table: {
-                widths: [50, 180, 70, 70, 70, 30],
+                widths: [50, '*',350, 90,90, 90, 50],
                 body: daftar
             }
         },
-        {
-            text: '',
-            style: 'header',
-            pageBreak: 'before',
-            pageOrientation: 'landscape'
-        },
+        
     ],
 
     styles: {
@@ -92,21 +98,82 @@ var dd = {
             alignment: 'center',
             fontSize: 9,
         },
+        judulKolomKosong: {
+            fontSize: 0,
+        },
         uang: {
             alignment: 'right',
             fontSize: 8,
         },
+        uangTebal: {
+            alignment: 'right',
+            fontSize: 8,
+            bold:true
+        },
+        uangTebalBiru: {
+            alignment: 'right',
+            fontSize: 8,
+            bold:true,
+            color: 'blue',
+        },
+        uangTebalMiring: {
+            alignment: 'right',
+            fontSize: 8,
+            bold:true,
+            italics: true
+        },
         tanggal: {
             alignment: 'center'
         },
+        isiDataKosong: {
+            fontSize: 0,
+            color:'white'
+        },
+        isiDataKosongTebal: {
+            fontSize: 0,
+            color:'white',
+            bold:true
+        },
+        
         isiData: {
             fontSize: 8,
+        },
+        isiDataTebal: {
+            fontSize: 8,
+            bold:true
+        },
+        isiDataTebalBiru: {
+            fontSize: 8,
+            bold:true,
+            color: 'blue'
+        },
+        isiDataTebalMiring: {
+            fontSize: 8,
+            bold:true,
+            italics:true
         },
         isiKode: {
             fontSize: 8,
             alignment: 'center'
         },
-
+        isiKodeTebal: {
+            fontSize: 8,
+            alignment: 'center',
+            bold:true
+        },
+        isiKodeTebalBiru: {
+            fontSize: 8,
+            alignment: 'center',
+            bold:true,
+            color: 'blue'
+        },
+        isiKodeTebalMiring: {
+            fontSize: 8,
+            alignment: 'center',
+            italics:true,
+            bold:true
+            
+        },
         judulLaporan: {
             fontSize: 15,
             alignment: 'center',
@@ -160,6 +227,40 @@ function susunListTabel(data, columns, styles, judulKolom) {
 
     return body;
 }
+
+function formatRow(daftar,nmstyle,indeksKondisi,kondisi){
+    for (let index = 1; index < daftar.length; index++) {
+      const element = daftar[index][indeksKondisi].text;
+      if (element == kondisi) {
+          var dataRow2 = [];  
+          for (let index2 = 0; index2 < daftar[0].length; index2++) {
+            var objKolom1={};  
+            objKolom1['text'] = daftar[index][index2].text;
+            objKolom1['style'] = nmstyle[index2];
+            dataRow2.push(objKolom1);
+          }
+          daftar.splice(index,1,dataRow2)
+      }
+    }
+    return daftar
+  }
+  
+
+
+  function formatKolomKhusus(daftar,nmstyle,indeksKondisi,kondisi,kolomKe){
+    for (let index = 1; index < daftar.length; index++) {
+      const element = daftar[index][indeksKondisi].text;
+      if (element == kondisi) {
+            var objKolom1={};  
+            objKolom1['text'] = daftar[index][kolomKe].text;
+            objKolom1['style'] = nmstyle;
+            daftar[index][kolomKe]=objKolom1
+            
+      }
+      
+    }
+    return daftar
+  }
 
 function setTglIndo(stgl) {
     var str = stgl;

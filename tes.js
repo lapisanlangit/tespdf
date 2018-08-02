@@ -68,17 +68,17 @@ daftar =
 //  var ganti=daftar[1][1].style='IsiDataTebal';
 
 //contoh penggunaan
-
-hasilFormat=formatRow(daftar,"isiDataTebal",1,"")
+let nmstyles = ['isiDataTebal', 'isiDataTebal', 'numberTebal']
+hasilFormat=formatRow(daftar,nmstyles,1,"")
 console.log(hasilFormat)
-hasilnya :
-[ [ { text: 'INDUK', style: 'judulKolom' },{ text: 'ANAK', style: 'judulKolom' },{ text: 'JUMLAH', style: 'judulKolom' } ],
-  [ { text: '1', style: 'isiDataTebal' },{ text: '', style: 'isiDataTebal' },{ text: '1000', style: 'isiDataTebal' } ],
-  [ { text: '1', style: 'isiData' }, { text: '01', style: 'isiData' },{ text: '500', style: 'number' } ],
-  [ { text: '1', style: 'isiData' }, { text: '02', style: 'isiData' },{ text: '500', style: 'number' } ],
-  [ { text: '2', style: 'isiDataTebal' },{ text: '', style: 'isiDataTebal' }, { text: '2000', style: 'isiDataTebal' } ],
-  [ { text: '2', style: 'isiData' },{ text: '01', style: 'isiData' },{ text: '1000', style: 'number' } ],
-  [ { text: '2', style: 'isiData' }, { text: '02', style: 'isiData' },{ text: '1000', style: 'number' } ] ]
+// hasilnya :
+// [ [ { text: 'INDUK', style: 'judulKolom' },{ text: 'ANAK', style: 'judulKolom' },{ text: 'JUMLAH', style: 'judulKolom' } ],
+//   [ { text: '1', style: 'isiDataTebal' },{ text: '', style: 'isiDataTebal' },{ text: '1000', style: 'isiDataTebal' } ],
+//   [ { text: '1', style: 'isiData' }, { text: '01', style: 'isiData' },{ text: '500', style: 'number' } ],
+//   [ { text: '1', style: 'isiData' }, { text: '02', style: 'isiData' },{ text: '500', style: 'number' } ],
+//   [ { text: '2', style: 'isiDataTebal' },{ text: '', style: 'isiDataTebal' }, { text: '2000', style: 'isiDataTebal' } ],
+//   [ { text: '2', style: 'isiData' },{ text: '01', style: 'isiData' },{ text: '1000', style: 'number' } ],
+//   [ { text: '2', style: 'isiData' }, { text: '02', style: 'isiData' },{ text: '1000', style: 'number' } ] ]
 
 
 function formatRow(daftar,nmstyle,indeksKondisi,kondisi){
@@ -89,7 +89,7 @@ function formatRow(daftar,nmstyle,indeksKondisi,kondisi){
         for (let index2 = 0; index2 < daftar[0].length; index2++) {
           var objKolom1={};  
           objKolom1['text'] = daftar[index][index2].text;
-          objKolom1['style'] = nmstyle;
+          objKolom1['style'] = nmstyle[index2];
           dataRow2.push(objKolom1);
         }
         daftar.splice(index,1,dataRow2)
@@ -99,31 +99,31 @@ function formatRow(daftar,nmstyle,indeksKondisi,kondisi){
 }
 
 
-hasilFormat=formatKolomKhusus(daftar,"uangtebal",1,"",2)
- console.log(hasilFormat)
-//  hasilnya : uangtebal akan terisi pada kolom tertentu
+// hasilFormat=formatKolomKhusus(daftar,"[]",1,"",2)
+//  console.log(hasilFormat)
+// //  hasilnya : uangtebal akan terisi pada kolom tertentu
 
- [ [ { text: 'INDUK', style: 'judulKolom' },
- { text: 'ANAK', style: 'judulKolom' },
- { text: 'JUMLAH', style: 'judulKolom' } ],
-[ { text: '1', style: 'isiData' },
- { text: '', style: 'isiData' },
- { text: '1000', style: 'uangtebal' } ],
-[ { text: '1', style: 'isiData' },
- { text: '01', style: 'isiData' },
- { text: '500', style: 'number' } ],
-[ { text: '1', style: 'isiData' },
- { text: '02', style: 'isiData' },
- { text: '500', style: 'number' } ],
-[ { text: '2', style: 'isiData' },
- { text: '', style: 'isiData' },
- { text: '2000', style: 'uangtebal' } ],
-[ { text: '2', style: 'isiData' },
- { text: '01', style: 'isiData' },
- { text: '1000', style: 'number' } ],
-[ { text: '2', style: 'isiData' },
- { text: '02', style: 'isiData' },
- { text: '1000', style: 'number' } ] ]
+//  [ [ { text: 'INDUK', style: 'judulKolom' },
+//  { text: 'ANAK', style: 'judulKolom' },
+//  { text: 'JUMLAH', style: 'judulKolom' } ],
+// [ { text: '1', style: 'isiData' },
+//  { text: '', style: 'isiData' },
+//  { text: '1000', style: 'uangtebal' } ],
+// [ { text: '1', style: 'isiData' },
+//  { text: '01', style: 'isiData' },
+//  { text: '500', style: 'number' } ],
+// [ { text: '1', style: 'isiData' },
+//  { text: '02', style: 'isiData' },
+//  { text: '500', style: 'number' } ],
+// [ { text: '2', style: 'isiData' },
+//  { text: '', style: 'isiData' },
+//  { text: '2000', style: 'uangtebal' } ],
+// [ { text: '2', style: 'isiData' },
+//  { text: '01', style: 'isiData' },
+//  { text: '1000', style: 'number' } ],
+// [ { text: '2', style: 'isiData' },
+//  { text: '02', style: 'isiData' },
+//  { text: '1000', style: 'number' } ] ]
 
 
 function formatKolomKhusus(daftar,nmstyle,indeksKondisi,kondisi,kolomKe){

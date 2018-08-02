@@ -59,8 +59,7 @@ let judulKolom = [{ text: 'KODE', style: 'judulKolom' }, { text: 'URAIAN', style
 
 //SUSUN 
 let daftar = susunListTabel(listData, kolom, styles, judulKolom);
-
-//   console.log(daftar);
+  console.log(daftar);
 
 
 
@@ -168,6 +167,42 @@ function susunListTabel(data, columns, styles, judulKolom) {
     return body;
 }
 
+
+function formatRow(daftar,nmstyle,indeksKondisi,kondisi){
+    for (let index = 1; index < daftar.length; index++) {
+      const element = daftar[index][indeksKondisi].text;
+      if (element == kondisi) {
+          var dataRow2 = [];  
+          for (let index2 = 0; index2 < daftar[0].length; index2++) {
+            var objKolom1={};  
+            objKolom1['text'] = daftar[index][index2].text;
+            objKolom1['style'] = nmstyle;
+            dataRow2.push(objKolom1);
+          }
+          daftar.splice(index,1,dataRow2)
+      }
+    }
+    return daftar
+  }
+
+
+
+  function formatKolomKhusus(daftar,nmstyle,indeksKondisi,kondisi,kolomKe){
+    for (let index = 1; index < daftar.length; index++) {
+      const element = daftar[index][indeksKondisi].text;
+      if (element == kondisi) {
+            var objKolom1={};  
+            objKolom1['text'] = daftar[index][kolomKe].text;
+            objKolom1['style'] = nmstyle;
+            daftar[index][kolomKe]=objKolom1
+            
+      }
+      
+    }
+    return daftar
+  }
+
+  
 function setTglIndo(stgl) {
     var str = stgl;
     var xtahun = str.substr(0, 4);
